@@ -1,58 +1,83 @@
-require("regenerator-runtime");
+class Map {
+    constructor(lat,lon) {
+        this.lat = lat;
+        this.lon = lon;
+        this.myMap = L.map('map');
+        this.bikeIcon =L.icon({
+            iconUrl: '../images/pin.png',
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            popupAnchor: [-3, -76],
+        });
+        this.initMap();
+    }
 
-let myHeaders = new Headers();
-myHeaders.append("id", "16fb384f5213dfb5f267956480bdba613d304c76");
+    // Méthode pour créer la map
+    initMap() {
+        this.myMap.setView([this.lat, this.lon], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+            attribution: 'données © OpenStreetMap/ODbL - rendu OSM France',
+            minZoom: 1,
+            maxZoom: 20
+        }).addTo(this.myMap);
+    };
+    
+}
 
-let requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
+/*
 
-const url = 'https://api.jcdecaux.com/vls/v1/stations?contract=marseille&apiKey=16fb384f5213dfb5f267956480bdba613d304c76'
 
 async function fetchData () {
-    const response = await fetch(url, requestOptions);
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-    console.error(response.status)
+
+        let myHeaders = new Headers();
+        myHeaders.append("id", "16fb384f5213dfb5f267956480bdba613d304c76");
+
+        let requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        const response = await fetch('https://api.jcdecaux.com/vls/v1/stations?contract=marseille&apiKey=16fb384f5213dfb5f267956480bdba613d304c76', requestOptions);
+        const jsonData = await response.json();
+        return jsonData;
+    };
+
+    async function getStationData () {
+        const data = await fetchData();
+        addMarker(data)
+    }
+
+    getStationData();
+
+    function addMarker(data) {
+        for (station of data) {
+            var marker = L.marker(station.position.lat, station.position.lng], {icon: bikeIcon}).addTo(myMap);
+            marker.bindPopup(station.name +"\n"+'bike : ' + station.available_bikes)
+        }
+    }
+
+
+async function getStationData () {
+    const data = await fetchData();
+    addMarker(data)
+}
+
+getStationData();
+
+
+
+function addMarker(data) {
+    for (station of data) {
+        var marker = L.marker(station.position.lat, station.position.lng], {icon: bikeIcon}).addTo(myMap);
+        marker.bindPopup(station.name +"\n"+'bike : ' + station.available_bikes)
     }
 }
 
-async function getStationsData () {
-  const stationsData = await fetchData();
-  return stationsData
-}
 
-getStationsData()
-
-
-let cityLat = 43.300000;
-let cityLon = 5.400000;
-let macarte = null;
-let stationInfo = getStationsData();
-
-
-function initMap() {
-  macarte = L.map('map').setView([cityLat, cityLon], 11);
-  // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut.
-  // Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
-  L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-    attribution: 'données © OpenStreetMap/ODbL - rendu OSM France',
-    minZoom: 1,
-    maxZoom: 20
-  }).addTo(macarte);
-
-
-  for (let station in stationInfo) {
-    let marker = L.marker([station.position.lat, station.position.lng]).addTo(macarte);
-    marker.bindPopup(station.name);
-    }
-}
-
-window.onload = function(){
-  // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
-  initMap();
+window.onload = function() {
+    initMap();
 };
+
+
+ */

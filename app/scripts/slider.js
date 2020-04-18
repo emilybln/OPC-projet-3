@@ -1,36 +1,86 @@
-let slides = document.querySelectorAll('#slides .slide');
-let currentSlide = 0;
-let slideInterval = setInterval(nextSlide,5000);
+class Slider {
+  constructor (id, slides, arrayText) {
+   this.idSlide = id;
+   this.slides = slides;
+   this.arrayText = arrayText;
+   this.currentSlide = 0; // slide que j'affiche
 
-function nextSlide(){
-  slides[currentSlide].className = 'slide';
-  currentSlide = (currentSlide+1)%slides.length;
-  slides[currentSlide].className = 'slide showing';
-}
+    this.time = "";
 
-let playing = true;
-let pauseButton = document.getElementById('pause');
+    this.playPause();
+    this.showingSlide();
 
-function pauseSlideshow(){
-  pauseButton.innerHTML = 'Lire le slider';
-  playing = false;
-  clearInterval(slideInterval);
-}
+    //gestionnaire d'événement clic
+    this.domPrev = document.getElementById('prevBtn');
+    this.domNext = document.getElementById('nextBtn');
+    this.domPlay = document.getElementById('playBtn');
+    this.domPause = document.getElementById('pauseBtn');
 
-function playSlideshow(){
-  pauseButton.innerHTML = 'Arrêter le slider';
-  playing = true;
-  slideInterval = setInterval(nextSlide,5000);
-}
+    this.domNext.addEventListener('click', this.nextSlide.bind(this) );
+    this.domPrev.addEventListener('click', this.prevSlide.bind(this) );
+    this.domPause.addEventListener('click', this.playPause.bind(this) );
+    this.domPlay.addEventListener('click', this.playPause.bind(this) );
 
-pauseButton.onclick = function(){
-  if(playing){ pauseSlideshow(); }
-  else{ playSlideshow(); }
-};
+  }
 
+  showingSlide() {
+    if (this.currentSlide < 0) {
+      this.currentSlide = this.slides.length-1;
+    }
+    if (this.currentSlide === this.slides.length) {
+      this.currentSlide = 0;
+    }
+    this.idSlide.src = this.slides[this.currentSlide];
+    this.displayText()
 
-function previousSlide(){
-  slides[currentSlide].className = 'slide';
-  currentSlide = (currentSlide-1)%slides.length;
-  slides[currentSlide].className = 'slide showing';
+  }
+
+  displayText(){
+    for(let i=0;i<this.arrayText.length;i++){
+      if(this.currentSlide === i){
+        this.arrayText[this.currentSlide].style.display = "inherit";
+      }else{
+        this.arrayText[i].style.display = "none";
+      }
+    }
+  }
+
+  nextSlide(){
+    this.currentSlide++;
+    this.showingSlide();
+  }
+
+  prevSlide(){
+    this.currentSlide--;
+    this.showingSlide();
+  }
+
+  playPause() {
+    let pause = document.getElementById("pause");
+    let play = document.getElementById("play");
+    if (this.time) {
+      clearInterval(this.time);
+      this.time = "";
+      pause.style.display = "none";
+      play.style.display = "block";
+    }
+    else {
+      this.time = setInterval(this.nextSlide.bind(this), 5000);
+      pause.style.display = "block";
+      play.style.display = "none";
+    }
+  }
+
+  keyboardEvent(e) {
+    switch(e.keyCode){
+      case 37: this.nextSlide();
+        break;
+      case 39: this.prevSlide();
+        break;
+      case 32: this.playPause();
+        break;
+    }
+
+  }
+
 }
