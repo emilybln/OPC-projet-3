@@ -10,6 +10,7 @@ class App {
         this.slides = ["images/img1.jpg", "images/img2.jpg","images/img3.jpg"];
         this.arrayText = document.getElementById("text_slider").getElementsByClassName('text');
 
+        this.initObjet();
     }
 
     //Instanciation des objets
@@ -23,4 +24,3 @@ class App {
 
 }
 
-let app = new App();

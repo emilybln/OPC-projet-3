@@ -9,6 +9,7 @@ class Slider {
 
     this.playPause();
     this.showingSlide();
+    this.keyboardEvent();
 
     //gestionnaire d'événement clic
     this.domPrev = document.getElementById('prevBtn');
@@ -46,18 +47,22 @@ class Slider {
   }
 
   nextSlide(){
+      clearInterval(this.time);
     this.currentSlide++;
     this.showingSlide();
+      this.time = setInterval(this.nextSlide.bind(this), 5000);
   }
 
   prevSlide(){
+      clearInterval(this.time);
     this.currentSlide--;
     this.showingSlide();
+      this.time = setInterval(this.nextSlide.bind(this), 5000);
   }
 
   playPause() {
-    let pause = document.getElementById("pause");
-    let play = document.getElementById("play");
+    let pause = document.getElementById("pauseBtn");
+    let play = document.getElementById("playBtn");
     if (this.time) {
       clearInterval(this.time);
       this.time = "";
@@ -71,16 +76,16 @@ class Slider {
     }
   }
 
-  keyboardEvent(e) {
-    switch(e.keyCode){
-      case 37: this.nextSlide();
-        break;
-      case 39: this.prevSlide();
-        break;
-      case 32: this.playPause();
-        break;
-    }
-
+  keyboardEvent() {
+      document.addEventListener('keydown', e => {
+          let caseCode = e.key;
+          if (caseCode == "ArrowRight") {
+              this.nextSlide();
+          }
+          if (caseCode == "ArrowLeft") {
+              this.prevSlide();
+          }
+      })
   }
 
 }
