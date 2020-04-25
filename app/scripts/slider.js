@@ -17,10 +17,10 @@ class Slider {
     this.domPlay = document.getElementById('playBtn');
     this.domPause = document.getElementById('pauseBtn');
 
-    this.domNext.addEventListener('click', this.nextSlide.bind(this) );
-    this.domPrev.addEventListener('click', this.prevSlide.bind(this) );
-    this.domPause.addEventListener('click', this.playPause.bind(this) );
-    this.domPlay.addEventListener('click', this.playPause.bind(this) );
+    this.domNext.addEventListener('click', this.nextSlide.bind(this));
+    this.domPrev.addEventListener('click', this.prevSlide.bind(this));
+    this.domPause.addEventListener('click', this.playPause.bind(this));
+    this.domPlay.addEventListener('click', this.playPause.bind(this));
 
   }
 
@@ -79,10 +79,10 @@ class Slider {
   keyboardEvent() {
       document.addEventListener('keydown', e => {
           let caseCode = e.key;
-          if (caseCode == "ArrowRight") {
+          if (caseCode === "ArrowRight") {
               this.nextSlide();
           }
-          if (caseCode == "ArrowLeft") {
+          if (caseCode === "ArrowLeft") {
               this.prevSlide();
           }
       })
