@@ -1,6 +1,6 @@
 class Canvas {
     constructor() {
-        this.canvas  = document.getElementById('canvas');
+        this.canvas = document.getElementById('canvas');
         this.context = this.canvas.getContext('2d');
         this.x = 0;
         this.y = 0;
@@ -8,7 +8,7 @@ class Canvas {
         this.isDrawing = false;
 
         this.initCanvas();
-
+        document.getElementById('clearBtn').addEventListener("click", this.clearCanvas.bind(this))
     }
 
     initCanvas() {
@@ -34,7 +34,6 @@ class Canvas {
                 this.y = 0;
                 this.isDrawing = false;
                 document.getElementById('checkBtn').disabled = false;
-                // app.signature = true;
             }
         });
 
@@ -47,6 +46,10 @@ class Canvas {
         this.context.moveTo(x1, y1);
         this.context.lineTo(x2, y2);
         this.context.stroke();
+    }
+
+    clearCanvas(){
+       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height );
     }
 
 }

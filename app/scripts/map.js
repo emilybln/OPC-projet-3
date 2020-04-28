@@ -3,7 +3,8 @@ class Map {
         this.lat = lat;
         this.lon = lon;
         this.myMap = L.map('map');
-        this.currentPin = "";
+        this.isStationSelected = false;
+
 
         this.pinGreen = L.icon({
             iconUrl: '../images/pin_green.png',
@@ -11,13 +12,13 @@ class Map {
             iconAnchor: [20, 40],
             popupAnchor: [-3, -76],
         });
+
         this.pinRed = L.icon({
             iconUrl: '../images/pin_red.png',
             iconSize: [40, 40],
             iconAnchor: [20, 40],
             popupAnchor: [-3, -76],
         });
-
 
         this.domStationName = document.getElementById('stationName');
         this.domStationLocation = document.getElementById('stationLocation');
@@ -26,7 +27,6 @@ class Map {
 
         this.initMap();
         this.getStationData();
-
     }
 
     // Méthode pour créer la map
@@ -79,6 +79,7 @@ class Map {
             }
             const displayData = () => this.displayDataStation(station);
             marker.on("click", displayData);
+
         }
     }
 
@@ -88,32 +89,34 @@ class Map {
         introEmpty.style.display = "none";
         dataStationSelected.style.display = "block";
 
+        let stationName = station.name.substring(station.name.indexOf("-") + 1);
+        let stationLocation = station.address.substring(station.address.indexOf("-") + 1);
+
         if ( station.available_bikes > 0 && station.status === "OPEN") {
             this.domStationStatus.innerHTML = "Ouvert";
-            this.domStationName.innerHTML = station.name;
-            this.domStationLocation.innerHTML = station.address;
+            this.domStationName.innerHTML = stationName;
+            this.domStationLocation.innerHTML = stationLocation;
             this.domAvailableBikes.innerHTML = station.available_bikes;
-            document.getElementById("form").style.display = "block"
+            sessionStorage.setItem("stationName", stationName);
+            this.isStationSelected = true;
         }
 
         else if (station.available_bikes === 0 && station.status === "OPEN"){
-            this.domStationStatus.innerHTML = "Fermée";
-            this.domStationName.innerHTML = station.name;
-            this.domStationLocation.innerHTML = station.address;
+            this.domStationStatus.innerHTML = "Indisponible";
+            this.domStationName.innerHTML = stationName;
+            this.domStationLocation.innerHTML = stationLocation;
             this.domAvailableBikes.innerHTML = "Aucun vélo n'est disponible";
-            document.getElementById("form").style.display = "none"
+            this.isStationSelected = false;
         }
 
         else if (station.status !== "OPEN") {
             this.domStationStatus.innerHTML = "Fermée";
-            this.domStationName.innerHTML = station.name;
-            this.domStationLocation.innerHTML = station.address;
+            this.domStationName.innerHTML = stationName;
+            this.domStationLocation.innerHTML = stationLocation;
             this.domAvailableBikes.innerHTML = "Aucun vélo n'est disponible";
-            document.getElementById("form").style.display = "none"
-
+            this.isStationSelected = false;
         }
     }
-
 
 }
 

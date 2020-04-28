@@ -17,8 +17,9 @@ class App {
     initObjet() {
         this.map = new Map(this.lat, this.lon);
         this.slider = new Slider(this.id, this.slides, this.arrayText);
-        this.reservation = new Reservation();
+        this.reservation = new Reservation(this.map, this.canvas);
         this.canvas = new Canvas();
+        this.timer = new Timer(this.reservation);
     }
 
 }

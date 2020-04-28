@@ -27,7 +27,7 @@ h3{
   font-size: 15px !important;
   letter-spacing: 2px;
   font-weight: 800 !important;
-  color: #ffffff80;
+  color: #2D343680;
   font-family: "Montserrat", arial, sans-serif ;
   line-height: 1;
 }
@@ -158,7 +158,7 @@ section {
   justify-content: space-between;
   align-items: center;
   padding: 60px 40px;
-  background-color: #58DDAF;
+  background-color: #DFE6E950;
   border-radius: 4px;
 }
 
@@ -254,7 +254,7 @@ section {
   padding: 30px;
 }
 
-#resumeStation h2 {
+#resume_station h2 {
   text-align: center;
 }
 
@@ -277,15 +277,14 @@ section {
 
 #stationName, #stationLocation, #stationStatus, #availableBikes {
   color: #2D3436;
-  text-align: left;
-  font-size: 14px !important;
-  text-transform: lowercase;
-  margin-left: 10px;
+  text-align: end;
+  font-size: 12px;
   margin-bottom: 0 !important;
 }
 
 .inline {
   display: flex;
+  justify-content: space-between;
 }
 
 hr {
@@ -301,7 +300,6 @@ hr {
   background-color: #ffffff;
   border-radius: 4px;
   padding: 20px 30px 30px;
-  display: none;
 }
 
 .input {
@@ -342,6 +340,10 @@ label {
   background-color: #2D3436;
 }
 
+.formButton:disabled {
+  background-color: #ededed;
+}
+
 #errorMsg {
   color: #FC4331;
 }
@@ -356,21 +358,42 @@ label {
 #canvas {
   background-color: #ffffff;
   border-radius: 4px;
-  width: 100%;
-  height: 180px;
+  //width: 100%;
+  //height: 180px;
 }
 
 /* ----------------- RECAP RESERVATION -----------------  */
 
 #timerReservation {
   width: 1024px;
-  height: 200px;
+  height: 100%;
   border: 2px solid #58DDAF;
   border-radius: 4px;
   padding: 30px;
   display: none;
   justify-content: center;
   margin-bottom: 60px;
+  text-align: center;
+}
+
+#timerReservation p {
+  color: #2D343670;
+}
+
+#resumeReservation {
+  padding-top: 20px;
+  font-size: 18px
+}
+
+#resumeUser {
+  font-size: 18px;
+  padding-bottom: 20px;
+}
+
+#timer{
+  font-size: 24px;
+  font-weight: 800;
+  padding-top: 30px;
 }
 
 /* ----------------- FOOTER -----------------  */

@@ -126,8 +126,9 @@
         <div id="signature_block">
           <hr>
           <p>🖊 Merci de signer pour valider la réservation</p>
-          <canvas id="canvas"></canvas>
+          <canvas id="canvas" width="380" height="180"></canvas>
           <button id="checkBtn" class="formButton" disabled>Valider</button>
+          <button id="clearBtn" class="formButton" disabled>effacer</button>
         </div>
       </div>
     </section>
@@ -140,7 +141,7 @@
       </div>
       <div id="resumeReservation"></div>
       <div id="resumeUser"></div>
-      <div id="timer"></div>
+      <div>⏱<span id="timer"></span></div>
     </section>
 
 
@@ -161,6 +162,7 @@
     <!-- reservation -->
     <script type="text/javascript" src="scripts/reservation.js"></script>
     <script type="text/javascript" src="scripts/canvas.js"></script>
+    <script type="text/javascript" src="scripts/timer.js"></script>
     <!-- canvas -->
     <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
