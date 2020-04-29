@@ -6,3 +6,6 @@
 // Uncomment to enable Bootstrap popovers
 // https://getbootstrap.com/docs/4.0/components/popovers/#example-enable-popovers-everywhere
 // $(function () { $('[data-toggle="popover"]').popover(); });
+
+
+let app = new App();

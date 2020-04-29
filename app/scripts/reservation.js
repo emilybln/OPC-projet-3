@@ -1,75 +1,66 @@
 class Reservation {
 
-    constructor (map, canvas) {
-        this.map = map;
-        this.isReservationDone = true;
-        this.canvas = canvas;
-        this.bookingBtn = document.getElementById('bookingBtn');
-        this.checkBtn = document.getElementById('checkBtn');
+  constructor (map) {
+    this.map = map;
+    this.isReservationDone = true;
+    this.canvas = "";
+    this.reservationBtn = document.getElementById('reservationBtn');
+    this.checkBtn = document.getElementById('checkBtn');
 
+    this.getUserData();
+    this.reservationBtn.addEventListener('click', this.onSubmit.bind(this));
+    this.checkBtn.addEventListener('click', this.onValidate.bind(this));
+  }
 
-        this.getUserData();
-        //this.isBtnActiv();
+  isFormValid(surname, name) {
+    return surname !== "" && name !== "" && this.map.isStationSelected === true;
+  }
 
-        this.bookingBtn.addEventListener('click', this.onSubmit.bind(this));
+  getUserData() {
+    const updatedSurname = localStorage.getItem("surname");
+    const updatedName = localStorage.getItem("name");
 
-        this.checkBtn.addEventListener('click', this.onValidate.bind(this));
+    if (updatedSurname) {
+      document.getElementById("surname").value = updatedSurname;
     }
-
-    isFormValid(surname, name,) {
-        if (surname !== "" && name !== "" && this.map.isStationSelected === true) {
-            return true;
-        }
-        return false;
+    if (updatedName) {
+      document.getElementById("name").value = updatedName;
     }
+  }
 
-    /*
-    isBtnActiv() {
-        if (document.getElementById("surname").value !== "" && document.getElementById('name').value !== "") {
-            console.log('coucou');
-        }
-        else { console.log('bye')}
+  storeUserData(name, surname) {
+    localStorage.setItem("surname", surname);
+    localStorage.setItem("name", name)
+  }
+
+  onSubmit() {
+    var surname = document.getElementById("surname").value;
+    var name = document.getElementById("name").value;
+
+    const isValid = this.isFormValid(surname, name);
+    if (isValid) {
+      this.storeUserData(name, surname);
+      this.canvas = new Canvas();
+      document.getElementById('form').style.display = 'none';
+      document.getElementById('canvasBlock').style.display = 'block';
     }
-    */
-
-    getUserData() {
-        const updatedSurname = localStorage.getItem("surname");
-        const updatedName = localStorage.getItem("name");
-
-        if (updatedSurname) {
-            document.getElementById("surname").value = updatedSurname;
-        }
-        if (updatedName) {
-            document.getElementById("name").value = updatedName;
-        }
+    else {
+      document.getElementById('errorMsg').innerHTML = '⛔️ Veuillez sélectionner une station et remplir les champs avant de valider';
     }
+  }
 
-    storeUserData(name, surname) {
-        localStorage.setItem("surname", surname);
-        localStorage.setItem("name", name)
-    }
+  onValidate() {
+    document.getElementById('recapBlock').style.display = 'block';
+    document.getElementById('canvasBlock').style.display = 'none';
+    document.getElementById('form').style.display = 'block';
+    this.reservationRecap();
+    this.canvas.clearCanvas();
+  }
 
-    onSubmit() {
-        var surname = document.getElementById("surname").value;
-        var name = document.getElementById("name").value;
-
-       const isValid = this.isFormValid(surname, name);
-        if (isValid) {
-            this.storeUserData(name, surname);
-            document.getElementById('form').style.display = 'none';
-            document.getElementById('signature_block').style.display = 'block';
-        }
-        else {
-            document.getElementById('errorMsg').innerHTML = '⛔️ Veuillez sélectionner une station et remplir les champs avant de valider';
-        }
-    }
-
-    onValidate() {
-        document.getElementById('timerReservation').style.display = 'block';
-        document.getElementById('signature_block').style.display = 'none';
-        document.getElementById('form').style.display = 'block';
-        this.isReservationDone = true;
-        this.canvas.clearCanvas();
-    }
-
+  reservationRecap() {
+    document.getElementById('reservationRecap').innerHTML = "1 vélo est réservé à la station "+sessionStorage.getItem("stationName");
+    document.getElementById('userRecap').innerHTML = "pour "+localStorage.getItem('surname')+" "+localStorage.getItem('name');
+    const timer = new Timer();
+    timer.launchTimer();
+  }
 }

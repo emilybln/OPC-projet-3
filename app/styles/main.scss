@@ -1,6 +1,6 @@
 body {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  //padding-top: 1.5rem;
+  //padding-bottom: 1.5rem;
   font-family: "Montserrat", arial, sans-serif !important;
   color: #2D3436;
 }
@@ -15,8 +15,8 @@ h1 {
 
 h2{
   display: block;
-  font-size: 18px;
-  font-weight: 600 !important;
+  font-size: 28px !important;
+  font-weight: 800 !important;
   color: #2D3436;
   font-family: "Montserrat", arial, sans-serif ;
   line-height: 1;
@@ -38,8 +38,25 @@ button {
 }
 
 section {
-  max-width: 1024px;
+  max-width: 924px;
   margin: auto;
+}
+
+@media (max-width: 768px) {
+  section {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 425px) {
+  section {
+    max-width: 377px;
+  }
+
+  h1 {
+    font-size: 32px !important;
+    margin: 20px auto !important;
+  }
 }
 
 
@@ -60,7 +77,7 @@ section {
   padding: 40px 20px;
 }
 
-#logo_text {
+#logoText {
   font-size: 32px;
   font-weight: 800 !important;
   color: #2D3436;
@@ -68,7 +85,7 @@ section {
   margin: 0 !important;
 }
 
-#block_logo {
+#logoBlock {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,7 +117,6 @@ section {
   margin-top: 30px;
 }
 
-/* TODO: rajouter les @media */
 
 /* ----------------- INTR0 -----------------  */
 
@@ -119,22 +135,15 @@ section {
   }
 }
 
+
 /* ----------------- SLIDER -----------------  */
 
-#slider_btns {
+#sliderBlock {
   margin: 80px auto 120px auto;
-  max-width: 1024px;
   display: block;
 }
 
-@media (max-width: 768px){
-  #slider_btns {
-    max-width: 680px;
-    margin: 80px auto 120px auto;
-  }
-}
-
-#block_img_text {
+#slider {
   width: 100%;
   height: 400px;
   justify-content: center;
@@ -142,14 +151,7 @@ section {
   margin-bottom: 60px;
 }
 
-@media (max-width: 768px){
-  #block_img_text {
-    height: 580px;
-    margin-bottom: 80px;
-  }
-}
-
-#slider {
+#slides {
   position: absolute;
   width: 100%;
   font-size: 18px;
@@ -162,34 +164,19 @@ section {
   border-radius: 4px;
 }
 
-@media (max-width: 768px){
-  #slider {
-    display: flex;
-    flex-direction: column;
-    padding: 60px 40px 30px 40px;
-  }
-}
-
-#img_slider {
+#slideImg {
   height: 320px;
   margin: auto 10px auto 30px;
   display: flex;
 }
 
-#text_slider {
+#slideText {
   text-align: left;
   max-width: 400px;
   margin: auto 30px;
 }
 
-@media (max-width: 768px){
-  #text_slider {
-    max-width: 420px;
-    margin: 30px;
-  }
-}
-
-.buttons_slider {
+.sliderButtons {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -224,42 +211,111 @@ section {
   border-radius: 40px;
 }
 
+#slideText h2 {
+  margin: 20px auto;
+}
+
+@media (max-width: 768px){
+  #sliderBlock {
+    margin: 80px auto;
+  }
+
+  #slider {
+    height: 560px;
+    margin-bottom: 80px;
+    display: flex;
+    justify-content: center;
+  }
+
+  #slides {
+    display: flex;
+    flex-direction: column;
+    padding: 60px 40px 30px 40px;
+  }
+
+  #slideText {
+    max-width: 400px;
+    margin-top: 30px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 425px){
+  #slideImg {
+    height: 220px;
+    margin: auto;
+  }
+
+  #sliderBlock {
+    margin: 50px auto;
+  }
+
+  #slideText {
+    margin: 30px auto 0 auto;
+  }
+
+  #slideText h2 {
+    font-size: 22px !important;
+  }
+
+  #slideText p {
+    font-size: 16px !important;
+  }
+
+  #slider {
+    height: 520px;
+    margin-bottom: 0;
+  }
+}
+
 
 /* ----------------- BLOCK MAP + RESERVATION -----------------  */
 
-.map_block {
+.mapReservationBlock {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1024px;
   margin: 40px auto;
 }
 
 /* -------- MAP --------  */
+
 #map {
   height: 550px;
-  width: 500px;
+  width: 450px;
   z-index: 1;
   border-radius: 4px;
 }
 
+@media (max-width: 768px) {
+  .mapReservationBlock {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #map {
+    height: 400px;
+    width: 680px;
+    margin-bottom: 30px;
+  }
+}
+
+
 /* -------- RECAP STATION --------  */
 
-#reservation_block {
+#reservationBlock {
   height: 100%;
   min-height: 550px;
-  width: 500px;
+  width: 450px;
   background-color: #DFE6E950;
   border-radius: 4px;
   padding: 30px;
 }
 
-#resume_station h2 {
+#stationRecap h2, #noStationSelected{
   text-align: center;
-}
-
-#noStationSelected {
-  display: block;
+  margin-bottom: 20px;
 }
 
 #dataStationSelected {
@@ -267,7 +323,7 @@ section {
   display: none;
 }
 
-#dataStationSelected .data_label {
+#dataStationSelected .dataLabel {
   color: #2D343680;
   font-weight: 900 !important;
   margin: 0 !important;
@@ -282,15 +338,26 @@ section {
   margin-bottom: 0 !important;
 }
 
-.inline {
+.inlineText {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 hr {
   border-top: 1px solid #2D343630 !important;
   /*TODO: ajouter box shadow*/
 }
+
+@media (max-width: 768px) {
+  #reservationBlock {
+    height: 100%;
+    min-height: 550px;
+    width: 100%;
+    padding: 40px;
+  }
+}
+
 
 /* -------- FORM --------  */
 
@@ -302,7 +369,7 @@ hr {
   padding: 20px 30px 30px;
 }
 
-.input {
+.formInput {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -326,7 +393,7 @@ label {
   text-align: left;
 }
 
-.formButton {
+.formBtn {
   padding: 10px 16px;
   font-weight: 800 !important;
   border-radius: 4px !important;
@@ -336,11 +403,11 @@ label {
   margin-top: 10px;
 }
 
-.formButton:hover {
+.formBtn:hover {
   background-color: #2D3436;
 }
 
-.formButton:disabled {
+.formBtn:disabled {
   background-color: #ededed;
 }
 
@@ -351,21 +418,26 @@ label {
 
 /* -------- CANVAS --------  */
 
-#signature_block {
+#canvasBlock {
   display: none;
 }
 
 #canvas {
   background-color: #ffffff;
   border-radius: 4px;
-  //width: 100%;
-  //height: 180px;
 }
+
+@media (max-width: 768px) {
+  #canvas {
+    width: 100%;
+    height: 200px;
+  }
+}
+
 
 /* ----------------- RECAP RESERVATION -----------------  */
 
-#timerReservation {
-  width: 1024px;
+#recapBlock {
   height: 100%;
   border: 2px solid #58DDAF;
   border-radius: 4px;
@@ -376,16 +448,16 @@ label {
   text-align: center;
 }
 
-#timerReservation p {
+#RecapBlock p {
   color: #2D343670;
 }
 
-#resumeReservation {
+#reservationRecap {
   padding-top: 20px;
   font-size: 18px
 }
 
-#resumeUser {
+#userRecap {
   font-size: 18px;
   padding-bottom: 20px;
 }
@@ -396,8 +468,14 @@ label {
   padding-top: 30px;
 }
 
-/* ----------------- FOOTER -----------------  */
+@media (max-width: 425px) {
+  #reservationRecap, #userRecap {
+    font-size: 16px;
+  }
+}
 
+
+/* ----------------- FOOTER -----------------  */
 
 #footer {
   padding-top: 1.5rem;
@@ -406,6 +484,11 @@ label {
   text-align: center ;
 }
 
+@media (max-width: 425px) {
+  #footer {
+    padding-bottom: 20px;
+  }
+}
 
 
 

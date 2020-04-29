@@ -1,27 +1,25 @@
 class Slider {
+
   constructor (id, slides, arrayText) {
    this.idSlide = id;
    this.slides = slides;
    this.arrayText = arrayText;
-   this.currentSlide = 0; // slide que j'affiche
+   this.currentSlide = 0;
+   this.time = "";
 
-    this.time = "";
+   this.prevBtn = document.getElementById('prevBtn');
+   this.nextBtn = document.getElementById('nextBtn');
+   this.playBtn = document.getElementById('playBtn');
+   this.playBtn = document.getElementById('pauseBtn');
 
-    this.playPause();
-    this.showingSlide();
-    this.keyboardEvent();
+   this.nextBtn.addEventListener('click', this.nextSlide.bind(this));
+   this.prevBtn.addEventListener('click', this.prevSlide.bind(this));
+   this.playBtn.addEventListener('click', this.playPause.bind(this));
+   this.playBtn.addEventListener('click', this.playPause.bind(this));
 
-    //gestionnaire d'événement clic
-    this.domPrev = document.getElementById('prevBtn');
-    this.domNext = document.getElementById('nextBtn');
-    this.domPlay = document.getElementById('playBtn');
-    this.domPause = document.getElementById('pauseBtn');
-
-    this.domNext.addEventListener('click', this.nextSlide.bind(this));
-    this.domPrev.addEventListener('click', this.prevSlide.bind(this));
-    this.domPause.addEventListener('click', this.playPause.bind(this));
-    this.domPlay.addEventListener('click', this.playPause.bind(this));
-
+   this.playPause();
+   this.showingSlide();
+   this.keyboardEvent();
   }
 
   showingSlide() {
@@ -32,32 +30,32 @@ class Slider {
       this.currentSlide = 0;
     }
     this.idSlide.src = this.slides[this.currentSlide];
-    this.displayText()
-
+    this.displayText();
   }
 
-  displayText(){
-    for(let i=0;i<this.arrayText.length;i++){
+  displayText() {
+    for(let i=0; i<this.arrayText.length; i++){
       if(this.currentSlide === i){
         this.arrayText[this.currentSlide].style.display = "inherit";
-      }else{
+      }
+      else {
         this.arrayText[i].style.display = "none";
       }
     }
   }
 
-  nextSlide(){
-      clearInterval(this.time);
+  nextSlide() {
+    clearInterval(this.time);
     this.currentSlide++;
     this.showingSlide();
-      this.time = setInterval(this.nextSlide.bind(this), 5000);
+    this.time = setInterval(this.nextSlide.bind(this), 5000);
   }
 
-  prevSlide(){
-      clearInterval(this.time);
+  prevSlide() {
+    clearInterval(this.time);
     this.currentSlide--;
     this.showingSlide();
-      this.time = setInterval(this.nextSlide.bind(this), 5000);
+    this.time = setInterval(this.nextSlide.bind(this), 5000);
   }
 
   playPause() {
@@ -77,15 +75,15 @@ class Slider {
   }
 
   keyboardEvent() {
-      document.addEventListener('keydown', e => {
-          let caseCode = e.key;
-          if (caseCode === "ArrowRight") {
-              this.nextSlide();
-          }
-          if (caseCode === "ArrowLeft") {
-              this.prevSlide();
-          }
-      })
+    document.addEventListener('keydown', e => {
+      let caseCode = e.key;
+      if (caseCode === "ArrowRight") {
+        this.nextSlide();
+      }
+      if (caseCode === "ArrowLeft") {
+        this.prevSlide();
+      }
+    })
   }
 
 }
