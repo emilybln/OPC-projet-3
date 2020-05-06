@@ -1,5 +1,4 @@
 class Timer {
-
   constructor() {
     this.totalTime = 12000000;
     this.endTime = 0;
@@ -15,16 +14,17 @@ class Timer {
 
     if (this.distance > 0) {
       //this.isReservationRunning = true;
-      document.getElementById('timer').innerHTML = minutes + "m " + seconds + "s";
+      document.getElementById("timer").innerHTML =
+        minutes + "m " + seconds + "s";
     }
     if (this.distance <= 0) {
-      document.getElementById('timer').innerHTML = "La réservation a expiré ";
+      document.getElementById("timer").innerHTML = "La réservation a expiré ";
       sessionStorage.clear();
       clearInterval();
     }
   }
 
-  launchTimer(){
-    setInterval(this.countTimer.bind(this),1000);
+  launchTimer() {
+    setInterval(this.countTimer.bind(this), 1000);
   }
 }
